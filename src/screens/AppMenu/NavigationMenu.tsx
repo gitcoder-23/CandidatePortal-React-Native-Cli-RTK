@@ -1,4 +1,4 @@
-import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {
   createStackNavigator,
@@ -47,12 +47,20 @@ const NavigationMenu = () => {
               <Stack.Screen
                 name="ArticleList"
                 component={ArticleList}
-                options={{...myOptions, headerShown: true}}
+                options={{
+                  ...myOptions,
+                  headerShown: true,
+                  title: 'Article List',
+                }}
               />
               <Stack.Screen
                 name="ArticleDetails"
                 component={ArticleDetails}
-                options={{...myOptions, headerShown: true}}
+                options={{
+                  ...myOptions,
+                  headerShown: true,
+                  title: 'Article Details',
+                }}
               />
             </>
           ) : (

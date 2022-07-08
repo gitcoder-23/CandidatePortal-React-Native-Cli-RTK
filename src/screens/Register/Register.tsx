@@ -11,11 +11,8 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {validatePassword} from '../Constants/helper';
-import {useTogglePasswordVisibility} from '../Constants/passVisibleHook';
-import {useAppDispatch, useAppSelector} from '../../app/hooks';
+import {useAppDispatch} from '../../app/hooks';
 import {RegisterAction} from '../../app/actions/authAction';
-import {logout} from '../../app/slices/authSlice';
 
 type RegisterType = {
   navigation: any;
@@ -24,14 +21,6 @@ type RegisterType = {
 
 const Register = ({navigation, route}: RegisterType) => {
   const dispatch = useAppDispatch();
-  const {
-    passwordVisibility,
-    conPassVisibility,
-    rightIcon,
-    rightConIcon,
-    handlePasswordVisibility,
-    handleConPasswordVisibility,
-  } = useTogglePasswordVisibility();
 
   const [inputState, setInputState] = useState({
     username: '',
@@ -51,27 +40,30 @@ const Register = ({navigation, route}: RegisterType) => {
     if (!username || !email || !password) {
       var atpos = email.indexOf('@');
       var dotpos = email.lastIndexOf('.');
-      let validatePass = validatePassword(password);
 
       Alert.alert('', 'Please fill all the fields');
       if (username.trim() === '') {
         setError({
           ...error,
           usernameErr: 'Please enter first name',
+          emailErr: '',
+          passErr: '',
         });
       } else if (email.trim() === '') {
         setError({
           ...error,
           emailErr: 'Please enter email',
+          passErr: '',
           usernameErr: '',
         });
       } else if (atpos < 1 || dotpos - atpos < 2) {
         setError({
           ...error,
           emailErr: 'Please enter valid email',
+          passErr: '',
           usernameErr: '',
         });
-      } else if (validatePass !== '') {
+      } else if (password === '') {
         setError({
           ...error,
           passErr: 'Please enter password',
@@ -174,16 +166,8 @@ const Register = ({navigation, route}: RegisterType) => {
                   }}
                   value={password}
                   secureTextEntry={true}
-                  // secureTextEntry={passwordVisibility}
                   placeholder={'Password'}
                 />
-                {/* <Pressable onPress={handlePasswordVisibility}>
-                  <MaterialCommunityIcons
-                    name={rightIcon}
-                    size={22}
-                    color="#232323"
-                  />
-                </Pressable> */}
               </View>
               <Text style={styles.errorText}>{error.passErr}</Text>
             </View>
