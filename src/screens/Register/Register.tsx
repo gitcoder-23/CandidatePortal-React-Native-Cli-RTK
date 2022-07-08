@@ -94,12 +94,19 @@ const Register = ({navigation, route}: RegisterType) => {
         .then(resp => {
           console.log('regResp->', resp);
           setRegisterLoading(false);
-          navigation.navigate('ArticleList');
+          Alert.alert('', 'Register Successful', [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.navigate('ArticleList');
+              },
+            },
+          ]);
         })
         .catch(err => {
           console.log('errrr->', err);
           setRegisterLoading(false);
-          Alert.alert('', 'Login failed! User already exists');
+          Alert.alert('', 'Register failed! User name & email already exists');
           navigation.navigate('Register');
         });
     }
@@ -176,7 +183,8 @@ const Register = ({navigation, route}: RegisterType) => {
                 <Text style={styles.btnText}>
                   {registerLoading ? (
                     <>
-                      <ActivityIndicator size="small" color="#ffffff" /> Signup
+                      <ActivityIndicator size="small" color="#ffffff" />{' '}
+                      Register
                     </>
                   ) : (
                     <>Register</>
