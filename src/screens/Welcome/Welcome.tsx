@@ -68,7 +68,13 @@ const Welcome = ({navigation, route}: WelcomeType) => {
         backgroundColor: '#0f5fa3',
         flex: 1,
       }}>
-      <Text style={{fontSize: 25, color: '#fff', fontWeight: 'bold'}}>
+      <Text
+        style={{
+          fontSize: 25,
+          color: '#fff',
+          fontWeight: 'bold',
+          marginBottom: 10,
+        }}>
         Welcome To Candidate Portal
       </Text>
       {loading ? (
