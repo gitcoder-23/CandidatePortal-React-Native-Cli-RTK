@@ -30,7 +30,9 @@ const ArticleList = ({navigation, route}: ArticleListType) => {
   const checkDetails = (item: any) => {
     console.log('item->', item);
 
-    navigation.navigate('ArticleDetails', {SingleArticle: item});
+    navigation.navigate('ArticleDetails', {
+      SingleArticle: item,
+    });
   };
 
   return (
